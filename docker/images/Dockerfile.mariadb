@@ -1,5 +1,12 @@
 FROM mariadb:latest
 
 RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl
+
+RUN curl -LsS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash -s -- --mariadb-server-version=11.2
+
+RUN apt-get update && \
     apt-get install -y mariadb-client && \
+    apt-get install -y net-tools && \
+    apt-get install -y iputils-ping && \ 
     rm -rf /var/lib/apt/lists/*
